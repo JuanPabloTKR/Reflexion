@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Mini Portfolio | Resume</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="font/css/fontello.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container"> <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="index.html"><img src="img/user.png" alt=""></a>
+      <ul class="nav nav-collapse pull-right">
+        <li><a href="index.html" class="active"><i class="icon-user"></i> Perfil</a></li>
+        <li><a href="logros.html"><i class="icon-trophy"></i> Logros</a></li>
+        <li><a href="gustos.html"><i class="icon-picture"></i> Gustos </a></li>
+        <li><a href="resume.html"><i class="icon-doc-text"></i> Tarea</a></li>
+      </ul>
+      <div class="nav-collapse collapse"></div>
+    </div>
+  </div>
+</div>
+<div class="container resume">
+  <h2>Mi Reflexión </h2>
+  <h3><center>Buena tarde, lo que yo aprendí de programacion web 1, fue de la mano de la profesora Ana linda Pineda, sin embargo yo desde
+      la prepa vi un poco como funcionaba html,  pero NO css ni JS, ahora que paso el semestre 7 retome cosas de la prepa y las mejore.</center>
+     <br> Yo espero de la materia, aprender cosas que aun no se hacer, y claro no perder lo que ya se aprendio, me gusta mucho
+          esto del desarrollo web, aunque apenas y se.<br><br>Me gustaria aprender bien a hacer aplicaciones con PHP, JAVA WEB y ASPEL </h3>
+  <div class="btn-center"> <a href="#" class="hire-me"><i class="icon-download"></i> ¿Donde trabajar?</a>
+    <h2>Me gustaria podar dar clases de informática</h2>
+  </div>
+</div>
+
+<center><canvas id="canvas" width="400" height="400"
+style="background-color:blue"></center>
+</canvas>
+
+<script>
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var radius = canvas.height / 2;
+ctx.translate(radius, radius);
+radius = radius * 0.90
+setInterval(drawClock, 1000);
+
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+}
+
+function drawFace(ctx, radius) {
+  var grad;
+  ctx.beginPath();
+  ctx.arc(0, 0, radius, 0, 2*Math.PI);
+  ctx.fillStyle = 'white';
+  ctx.fill();
+  grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+  grad.addColorStop(0, '#333');
+  grad.addColorStop(0.5, 'white');
+  grad.addColorStop(1, '#333');
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = radius*0.1;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+  ctx.fillStyle = '#333';
+  ctx.fill();
+}
+
+function drawNumbers(ctx, radius) {
+  var ang;
+  var num;
+  ctx.font = radius*0.15 + "px arial";
+  ctx.textBaseline="middle";
+  ctx.textAlign="center";
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
+
+function drawTime(ctx, radius){
+    var now = new Date();
+    var hour = now.getHours();
+    var minute = now.getMinutes();
+    var second = now.getSeconds();
+    //hour
+    hour=hour%12;
+    hour=(hour*Math.PI/6)+
+    (minute*Math.PI/(6*60))+
+    (second*Math.PI/(360*60));
+    drawHand(ctx, hour, radius*0.5, radius*0.07);
+    //minute
+    minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+    drawHand(ctx, minute, radius*0.8, radius*0.07);
+    // second
+    second=(second*Math.PI/30);
+    drawHand(ctx, second, radius*0.9, radius*0.02);
+}
+
+function drawHand(ctx, pos, length, width) {
+    ctx.beginPath();
+    ctx.lineWidth = width;
+    ctx.lineCap = "round";
+    ctx.moveTo(0,0);
+    ctx.rotate(pos);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.rotate(-pos);
+}
+</script>
+<div class="row social">
+  <ul class="social-icons">
+    <li><a href="#"><img src="img/fb.png" alt=""></a></li>
+    <li><a href="#"><img src="img/tw.png" alt=""></a></li>
+    <li><a href="#"><img src="img/go.png" alt=""></a></li>
+    <li><a href="#"><img src="img/pin.png" alt=""></a></li>
+    <li><a href="#"><img src="img/st.png" alt=""></a></li>
+    <li><a href="#"><img src="img/dr.png" alt=""></a></li>
+  </ul>
+</div>
+<div class="footer">
+  <div class="container">
+    <p class="pull-left"><a href="https://www.uaem.mx/" target="_blank">www.uaem.mx</a></p>
+    <p class="pull-right"><a href="#myModal" role="button" data-toggle="modal"> <i class="icon-mail"></i>Ayuda</a></p>
+  </div>
+</div>
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel"><i class="icon-mail"></i>Ayuda Porfavor</h3>
+  </div>
+  <div class="modal-body">
+    <form action="#">
+      <input type="text" placeholder="Me falta Aprender">
+      <input type="text" placeholder="A validar los inputs y">
+      <input type="text" placeholder="que  los comentarios que dejen, me aparezcan en mi corrreo ">
+      <textarea rows="3" style="width:80%"></textarea>
+      <br>
+      <button type="submit" class="btn btn-large"><i class="icon-paper-plane"></i> SUBMIT</button>
+    </form>
+  </div>
+</div>
+<script src="js/jquery-1.10.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+$('#myModal').modal('hidden')
+</script>
+</body>
+</html>
